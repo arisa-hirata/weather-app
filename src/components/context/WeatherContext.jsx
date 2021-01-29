@@ -1,8 +1,7 @@
 import React, { useState, createContext } from 'react';
-
 export const WeatherContext = createContext();
 
-const API_KEY = 'e1ec43e71a98cc14a4799aabd7b70c27';
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 export const WeatherProvider = (props) => {
     const [city, setCity] = useState('');
