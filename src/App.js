@@ -3,6 +3,8 @@ import NavBar from './components/NavBar';
 import Weather from './components/Weather';
 import { WeatherProvider } from './components/context/WeatherContext';
 import './App.css';
+import "weather-icons/css/weather-icons.css";
+
 
 function App() {
   return (
