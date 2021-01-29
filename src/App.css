@@ -14,3 +14,12 @@
   align-items: center;
   justify-content: flex-end;
 }
+
+.weather_container {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 400px;
+  text-align: center;
+}
