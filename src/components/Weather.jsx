@@ -14,7 +14,7 @@ const WEATHER_ICONS = {
     CloudyNight: "wi-night-alt-cloudy",
     FoggyNight: "wi-night-fog",
     SonwyNight: "wi-night-snow",
-    RaintNight: "wi-night-rain",
+    RainyNight: "wi-night-rain",
     DrizzleNight: "wi-night-showers",
     ThunderstormNight: "wi-night-thunderstorm"
 }
@@ -50,7 +50,7 @@ const Weather = () => {
         }
     } else if (weatherIcon >= 500 && weatherIcon <= 521) {
         if (sunset < dt) {
-            var icon = WEATHER_ICONS.Rainy;
+            var icon = WEATHER_ICONS.RainyNight;
         } else {
             var icon = WEATHER_ICONS.Rain;
         }
@@ -84,14 +84,21 @@ const Weather = () => {
         <div className="weather_container">
             <div>
                 <h1 style={{ marginTop: 100 }}>{cityName}, {country}</h1>
-                <div>
-                    <p><i className={`wi ${icon}`} style={{fontSize: 80}}></i></p>
-                    {weatherMain}
-                    {temp}
-                    <p>Feels like {feelslike} ℃</p>
-
+                <h3>{weatherMain}</h3>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 80 }}>
+                    <div>
+                        <p><i className={`wi ${icon}`} style={{fontSize: 80}}></i></p>
+                    </div>
+                    <div>
+                         <h1 style={{fontSize: 50}}>{temp} ℃</h1>
+                    </div>
+                    {/*<p>Feels like {feelslike} ℃</p>*/}
                 </div>
-                <h4>Today: {weather} currently. The highest will be {tempMax} ℃. The lowest will be {tempMin}.</h4>
+                <div style={{ display: 'flex' , justifyContent: 'space-evenly', height: 50}}>
+                    <h4>H: {tempMax} ℃</h4>
+                    <h4>L: {tempMin} ℃</h4>
+                </div>
+                <h3>Today: {weather} currently.</h3>
             </div>
         </div>
     );

@@ -37,10 +37,10 @@ export const WeatherProvider = (props) => {
             setWeatherMain(weather[0].main);
             setWeather(weather[0].description);
             setWeatherIcon(weather[0].id);
-            setTemp(main.temp);
+            setTemp(Math.floor(main.temp-273.15));
             setFeelsLike(main.feels_like);
-            setTempMax(main.temp_max);
-            setTempMin(main.temp_min);
+            setTempMax(Math.floor(main.temp_max-273.15));
+            setTempMin(Math.floor(main.temp_min-273.15));
 
             setDt(dt);
             setSunrise(sys.sunrise);
