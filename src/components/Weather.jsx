@@ -81,13 +81,13 @@ const Weather = () => {
                             <p><i className={`wi ${icon}`} style={{fontSize: 80}}></i></p>
                         </div>
                         <div>
-                            <h1 style={{fontSize: 50}}>{Math.floor(weather.main.temp-273.15)} ℃</h1>
+                            <h1 style={{fontSize: 50}}>{Math.floor(weather.main.temp-273.15)}°</h1>
                         </div>
                         {/*<p>Feels like {feelslike} ℃</p>*/}
                     </div>
                     <div style={{ display: 'flex' , justifyContent: 'space-evenly', height: 50}}>
-                        <h4>H: {Math.floor(weather.main.temp_max-273.15)} ℃</h4>
-                        <h4>L: {Math.floor(weather.main.temp_min-273.15)} ℃</h4>
+                        <h4>H: {Math.floor(weather.main.temp_max-273.15)}°</h4>
+                        <h4>L: {Math.floor(weather.main.temp_min-273.15)}°</h4>
                     </div>
                     <h3>Today: {weather.weather[0].description} currently.</h3>
                 </div>
