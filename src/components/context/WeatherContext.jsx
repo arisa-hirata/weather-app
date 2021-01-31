@@ -9,6 +9,7 @@ export const WeatherProvider = (props) => {
     const [city, setCity] = useState('');
     const [weather, setWeather] = useState([]);
     const [forecast, setForecast] = useState([]);
+
     const getWeather = async () => {
         try {
             const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
@@ -22,8 +23,6 @@ export const WeatherProvider = (props) => {
 
             setWeather(weatherData.data);
             setForecast(forecastData.data);
-
-
 
         } catch (e) {
             console.log("error: ", e);

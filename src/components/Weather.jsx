@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { WeatherContext } from './context/WeatherContext';
 import '../App.css';
 
@@ -22,7 +22,7 @@ const WEATHER_ICONS = {
 const Weather = () => {
     const { weather } = useContext(WeatherContext);
 
-    if (weather.name !== undefined) {
+    // if (weather.name !== undefined) {
         const weatherIcon = weather.weather[0].id ;
 
         if (weatherIcon >= 200 && weatherIcon < 232) {
@@ -68,11 +68,10 @@ const Weather = () => {
                 var icon = WEATHER_ICONS.Clouds;
             }
         }
-    }
+    // }
 
     return (
-        <div className="weather_container">
-            { weather.name !== undefined ? (
+        <div className="content-container">
                 <div>
                     <h1 style={{ marginTop: 100 }}>{weather.name}, {weather.sys.country}</h1>
                     <h3>{weather.weather[0].main}</h3>
@@ -89,9 +88,8 @@ const Weather = () => {
                         <h4>H: {Math.floor(weather.main.temp_max-273.15)}°</h4>
                         <h4>L: {Math.floor(weather.main.temp_min-273.15)}°</h4>
                     </div>
-                    <h3>Today: {weather.weather[0].description} currently.</h3>
+                    <h3>{weather.weather[0].description} currently.</h3>
                 </div>
-            ) : ('') }
         </div>
     );
 }

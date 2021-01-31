@@ -15,11 +15,18 @@
   justify-content: flex-end;
 }
 
-.weather_container {
+.content-container {
   margin: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   max-width: 400px;
   text-align: center;
+}
+
+svg {
+  margin: auto;
+  overflow: visible;
+  height: 150px;
+  width: 300px;
 }
