@@ -37,43 +37,43 @@ const Weather = () => {
         } = useContext(WeatherContext);
 
     if (weatherIcon >= 200 && weatherIcon < 232) {
-        if (sunset < dt) {
+        if (sunset < dt || dt <= sunrise) {
             var icon = WEATHER_ICONS.ThunderstormNight;
         } else {
             var icon = WEATHER_ICONS.Thunderstorm;
         }
     } else if (weatherIcon >= 300 && weatherIcon <= 321) {
-        if (sunset < dt) {
+        if (sunset < dt || dt <= sunrise) {
             var icon = WEATHER_ICONS.DrizzleNight;
         } else {
             var icon = WEATHER_ICONS.Drizzle;
         }
     } else if (weatherIcon >= 500 && weatherIcon <= 521) {
-        if (sunset < dt) {
+        if (sunset < dt || dt <= sunrise) {
             var icon = WEATHER_ICONS.RainyNight;
         } else {
             var icon = WEATHER_ICONS.Rain;
         }
     } else if (weatherIcon >= 600 && weatherIcon <= 622) {
-        if (sunset < dt) {
+        if (sunset < dt || dt <= sunrise) {
             var icon = WEATHER_ICONS.SonwyNight;
         } else {
             var icon = WEATHER_ICONS.Snow;
         }
     } else if (weatherIcon >= 701 && weatherIcon <= 781) {
-        if (sunset < dt) {
+        if (sunset < dt || dt <= sunrise) {
             var icon = WEATHER_ICONS.FoggyNight;
         } else {
             var icon = WEATHER_ICONS.Atmosphere;
         }
     } else if (weatherIcon === 800 && sunrise <= dt < sunset) {
-        if (sunset < dt) {
+        if (sunset < dt || dt <= sunrise) {
             var icon = WEATHER_ICONS.ClearNight;
         } else {
             var icon = WEATHER_ICONS.Clear;
         }
     } else if (weatherIcon >= 801 && weatherIcon <= 804) {
-        if (sunset < dt) {
+        if (sunset < dt || dt <= sunrise) {
             var icon = WEATHER_ICONS.CloudyNight;
         } else {
             var icon = WEATHER_ICONS.Clouds;
