@@ -21,6 +21,7 @@ const WEATHER_ICONS = {
 
 const Weather = () => {
     const { weather } = useContext(WeatherContext);
+    console.log(weather.weather[0].id);
 
         const weatherIcon = weather.weather[0].id ;
 
@@ -54,7 +55,7 @@ const Weather = () => {
             } else {
                 var icon = WEATHER_ICONS.Atmosphere;
             }
-        } else if (weatherIcon === 800 && weather.sys.sunrise <= weather.dt < weather.syssunset) {
+        } else if (weatherIcon === 800) {
             if (weather.sys.sunset < weather.dt || weather.dt <= weather.sys.sunrise) {
                 var icon = WEATHER_ICONS.ClearNight;
             } else {
