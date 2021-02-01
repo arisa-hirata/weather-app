@@ -21,7 +21,6 @@ const WEATHER_ICONS = {
 
 const Weather = () => {
     const { weather } = useContext(WeatherContext);
-    console.log(weather.weather[0].id);
 
         const weatherIcon = weather.weather[0].id ;
 
