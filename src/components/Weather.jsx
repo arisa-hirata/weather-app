@@ -1,15 +1,15 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { WeatherContext } from './context/WeatherContext';
 import '../App.css';
 
 const WEATHER_ICONS = {
     Thunderstorm: "wi-thunderstorm",
     Drizzle: "wi-sleet",
-    Rain: "wi-storm-showers",
+    Rain: "wi-rain",
     Snow: "wi-snow",
     Atmosphere: "wi-fog",
     Clear: "wi-day-sunny",
-    Clouds: "wi-day-fog",
+    Clouds: "wi-cloud",
     ClearNight: "wi-night-clear",
     CloudyNight: "wi-night-alt-cloudy",
     FoggyNight: "wi-night-fog",
@@ -20,86 +20,75 @@ const WEATHER_ICONS = {
 }
 
 const Weather = () => {
-    const
-        {
-            weather,
-            cityName,
-            country,
-            weatherMain,
-            weatherIcon,
-            temp,
-            feelslike,
-            tempMax,
-            tempMin,
-            dt,
-            sunrise,
-            sunset
-        } = useContext(WeatherContext);
+    const { weather } = useContext(WeatherContext);
+    console.log(weather.weather[0].id);
 
-    if (weatherIcon >= 200 && weatherIcon < 232) {
-        if (sunset < dt) {
-            var icon = WEATHER_ICONS.ThunderstormNight;
-        } else {
-            var icon = WEATHER_ICONS.Thunderstorm;
+        const weatherIcon = weather.weather[0].id ;
+
+        if (weatherIcon >= 200 && weatherIcon < 232) {
+            if (weather.sys.sunset < weather.dt || weather.dt <= weather.sys.sunrise) {
+                var icon = WEATHER_ICONS.ThunderstormNight;
+            } else {
+                var icon = WEATHER_ICONS.Thunderstorm;
+            }
+        } else if (weatherIcon >= 300 && weatherIcon <= 321) {
+            if (weather.sys.sunset < weather.dt || weather.dt <= weather.sys.sunrisee) {
+                var icon = WEATHER_ICONS.DrizzleNight;
+            } else {
+                var icon = WEATHER_ICONS.Drizzle;
+            }
+        } else if (weatherIcon >= 500 && weatherIcon <= 521) {
+            if (weather.sys.sunset < weather.dt || weather.dt <= weather.sys.sunrise) {
+                var icon = WEATHER_ICONS.RainyNight;
+            } else {
+                var icon = WEATHER_ICONS.Rain;
+            }
+        } else if (weatherIcon >= 600 && weatherIcon <= 622) {
+            if (weather.sys.sunset < weather.dt || weather.dt <= weather.sys.sunrise) {
+                var icon = WEATHER_ICONS.SonwyNight;
+            } else {
+                var icon = WEATHER_ICONS.Snow;
+            }
+        } else if (weatherIcon >= 701 && weatherIcon <= 781) {
+            if (weather.sys.sunset < weather.dt || weather.dt <= weather.sys.sunrise) {
+                var icon = WEATHER_ICONS.FoggyNight;
+            } else {
+                var icon = WEATHER_ICONS.Atmosphere;
+            }
+        } else if (weatherIcon === 800) {
+            if (weather.sys.sunset < weather.dt || weather.dt <= weather.sys.sunrise) {
+                var icon = WEATHER_ICONS.ClearNight;
+            } else {
+                var icon = WEATHER_ICONS.Clear;
+            }
+        } else if (weatherIcon >= 801 && weatherIcon <= 804) {
+            if (weather.sys.sunset < weather.dt || weather.dt <= weather.sys.sunrise) {
+                var icon = WEATHER_ICONS.CloudyNight;
+            } else {
+                var icon = WEATHER_ICONS.Clouds;
+            }
         }
-    } else if (weatherIcon >= 300 && weatherIcon <= 321) {
-        if (sunset < dt) {
-            var icon = WEATHER_ICONS.DrizzleNight;
-        } else {
-            var icon = WEATHER_ICONS.Drizzle;
-        }
-    } else if (weatherIcon >= 500 && weatherIcon <= 521) {
-        if (sunset < dt) {
-            var icon = WEATHER_ICONS.RainyNight;
-        } else {
-            var icon = WEATHER_ICONS.Rain;
-        }
-    } else if (weatherIcon >= 600 && weatherIcon <= 622) {
-        if (sunset < dt) {
-            var icon = WEATHER_ICONS.SonwyNight;
-        } else {
-            var icon = WEATHER_ICONS.Snow;
-        }
-    } else if (weatherIcon >= 701 && weatherIcon <= 781) {
-        if (sunset < dt) {
-            var icon = WEATHER_ICONS.FoggyNight;
-        } else {
-            var icon = WEATHER_ICONS.Atmosphere;
-        }
-    } else if (weatherIcon === 800 && sunrise <= dt < sunset) {
-        if (sunset < dt) {
-            var icon = WEATHER_ICONS.ClearNight;
-        } else {
-            var icon = WEATHER_ICONS.Clear;
-        }
-    } else if (weatherIcon >= 801 && weatherIcon <= 804) {
-        if (sunset < dt) {
-            var icon = WEATHER_ICONS.CloudyNight;
-        } else {
-            var icon = WEATHER_ICONS.Clouds;
-        }
-    }
 
     return (
-        <div className="weather_container">
-            <div>
-                <h1 style={{ marginTop: 100 }}>{cityName}, {country}</h1>
-                <h3>{weatherMain}</h3>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 80 }}>
-                    <div>
-                        <p><i className={`wi ${icon}`} style={{fontSize: 80}}></i></p>
+        <div className="content-container">
+                <div>
+                    <h1 style={{ marginTop: 100 }}>{weather.name}, {weather.sys.country}</h1>
+                    <h3>{weather.weather[0].main}</h3>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 80 }}>
+                        <div>
+                            <p><i className={`wi ${icon}`} style={{fontSize: 80}}></i></p>
+                        </div>
+                        <div>
+                            <h1 style={{fontSize: 50}}>{Math.floor(weather.main.temp-273.15)}°</h1>
+                        </div>
+                        {/*<p>Feels like {feelslike} ℃</p>*/}
                     </div>
-                    <div>
-                         <h1 style={{fontSize: 50}}>{temp} ℃</h1>
+                    <div style={{ display: 'flex' , justifyContent: 'space-evenly', height: 50}}>
+                        <h4>H: {Math.floor(weather.main.temp_max-273.15)}°</h4>
+                        <h4>L: {Math.floor(weather.main.temp_min-273.15)}°</h4>
                     </div>
-                    {/*<p>Feels like {feelslike} ℃</p>*/}
+                    <h3>{weather.weather[0].description} currently.</h3>
                 </div>
-                <div style={{ display: 'flex' , justifyContent: 'space-evenly', height: 50}}>
-                    <h4>H: {tempMax} ℃</h4>
-                    <h4>L: {tempMin} ℃</h4>
-                </div>
-                <h3>Today: {weather} currently.</h3>
-            </div>
         </div>
     );
 }

@@ -1,50 +1,28 @@
 import React, { useState, createContext } from 'react';
+import axios from 'axios';
+
 export const WeatherContext = createContext();
 
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 export const WeatherProvider = (props) => {
     const [city, setCity] = useState('');
-    const [cityName, setCityName] = useState('');
-    const [country, setCountry] = useState([]);
     const [weather, setWeather] = useState([]);
-    const [weatherMain, setWeatherMain] = useState([]);
-    const [weatherIcon, setWeatherIcon] = useState([]);
-    const [temp, setTemp] = useState([]);
-    const [feelslike, setFeelsLike] = useState([]);
-    const [tempMax, setTempMax] = useState([]);
-    const [tempMin, setTempMin] = useState([]);
-    const [dt, setDt] = useState([]);
-    const [sunrise, setSunrise] = useState([]);
-    const [sunset, setSunset] = useState([]);
+    const [forecast, setForecast] = useState([]);
 
     const getWeather = async () => {
         try {
             const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
 
-            const weatherData = await fetch(weatherUrl);
-            const { weather, main, name, sys, dt } = await weatherData.json();
-            console.log("weather: ", weather);
-            console.log("main: ", main);
-            console.log("weatherID: ", weather[0].id);
-            // console.log("dt: ", new Date(dt * 1000));
-            console.log("dt: ", dt);
-            console.log("sunrise: ", sys.sunrise);
-            console.log("sunset: ", sys.sunset);
+            const forecastUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}`;
 
-            setCityName(name);
-            setCountry(sys.country);
-            setWeatherMain(weather[0].main);
-            setWeather(weather[0].description);
-            setWeatherIcon(weather[0].id);
-            setTemp(Math.floor(main.temp-273.15));
-            setFeelsLike(main.feels_like);
-            setTempMax(Math.floor(main.temp_max-273.15));
-            setTempMin(Math.floor(main.temp_min-273.15));
+            const weatherData = await axios(weatherUrl);
+            const forecastData = await axios(forecastUrl);
+            // console.log("weatherData: ", weatherData.data);
+            console.log("forecastData: ", forecastData.data);
 
-            setDt(dt);
-            setSunrise(sys.sunrise);
-            setSunset(sys.sunset);
+            setWeather(weatherData.data);
+            setForecast(forecastData.data);
 
         } catch (e) {
             console.log("error: ", e);
@@ -63,19 +41,9 @@ export const WeatherProvider = (props) => {
     return (
         <WeatherContext.Provider
             value={{
-                cityName,
-                country,
                 city,
                 weather,
-                weatherMain,
-                weatherIcon,
-                temp,
-                feelslike,
-                tempMax,
-                tempMin,
-                dt,
-                sunrise,
-                sunset,
+                forecast,
                 handleSearchChange,
                 handleSubmit,
             }}
