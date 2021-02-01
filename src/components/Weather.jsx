@@ -5,11 +5,11 @@ import '../App.css';
 const WEATHER_ICONS = {
     Thunderstorm: "wi-thunderstorm",
     Drizzle: "wi-sleet",
-    Rain: "wi-storm-showers",
+    Rain: "wi-rain",
     Snow: "wi-snow",
     Atmosphere: "wi-fog",
     Clear: "wi-day-sunny",
-    Clouds: "wi-day-fog",
+    Clouds: "wi-cloud",
     ClearNight: "wi-night-clear",
     CloudyNight: "wi-night-alt-cloudy",
     FoggyNight: "wi-night-fog",
@@ -22,7 +22,6 @@ const WEATHER_ICONS = {
 const Weather = () => {
     const { weather } = useContext(WeatherContext);
 
-    // if (weather.name !== undefined) {
         const weatherIcon = weather.weather[0].id ;
 
         if (weatherIcon >= 200 && weatherIcon < 232) {
@@ -68,7 +67,6 @@ const Weather = () => {
                 var icon = WEATHER_ICONS.Clouds;
             }
         }
-    // }
 
     return (
         <div className="content-container">

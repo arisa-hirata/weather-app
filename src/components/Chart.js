@@ -40,12 +40,12 @@ const Chart = () => {
             console.log("forecastDataElement: ", forecastDataElement);
 
 
-            tempMax = forecastDataElement.main.temp-273.15 > tempMax ? Math.round(forecastDataElement.main.temp-273.15) : tempMax;
-            tempMin = forecastDataElement.main.temp - 273.15 < tempMin ? Math.round(forecastDataElement.main.temp - 273.15) : tempMin;
+            tempMax = forecastDataElement.main.temp-273 > tempMax ? Math.round(forecastDataElement.main.temp-273) : tempMax;
+            tempMin = forecastDataElement.main.temp - 273 < tempMin ? Math.round(forecastDataElement.main.temp - 273) : tempMin;
 
             samples.push(
             {
-                temp: forecastDataElement.main.temp-273.15,
+                temp: forecastDataElement.main.temp-273,
                 time: forecastDataElement.dt_txt.substr(forecastDataElement.dt_txt.length-8, forecastDataElement.dt_txt.length).substr(0,5),
                 icon: forecastDataElement.weather[0].icon,
                 idx: j-startIndex
@@ -65,8 +65,6 @@ const Chart = () => {
         const width = document.getElementsByClassName("svg")[0].getClientRects()[0].width;
         const height = document.getElementsByClassName("svg")[0].getClientRects()[0].height;
 
-        console.log("forecastData: ", forecastData);
-
         const lineScaleBand = scaleBand()
         .domain(forecastData.map(sample => {return sample.time}))
         .paddingOuter(-0.55)
@@ -77,7 +75,7 @@ const Chart = () => {
             .range([0, width]); // map to value (svg pixel length)
 
         const yScale = scaleLinear()
-            .domain([min-273.15,max-273.15])
+            .domain([min-273,max-273])
             .range([height, 0]); // map to value (svg pixel height)
 
         const xAxis = axisBottom(lineScaleBand);
@@ -113,7 +111,7 @@ const Chart = () => {
         // add the area under line
         svg
             .selectAll('path')
-            .data([forecastData.map(forecastDataElement => Math.round(forecastDataElement.temp-273.15))])
+            .data([forecastData.map(forecastDataElement => Math.round(forecastDataElement.temp-273))])
             .attr('class', 'area')
             .style('transform', `translateY(-${height}px)`)
             .transition()
@@ -124,7 +122,7 @@ const Chart = () => {
         // Add the line
         svg
             .selectAll('.line')
-            .data([forecastData.map(forecastDataElement => Math.round(forecastDataElement.temp-273.15))])
+            .data([forecastData.map(forecastDataElement => Math.round(forecastDataElement.temp-273))])
             .join('path')
             .attr('class', 'line')
             .transition()
