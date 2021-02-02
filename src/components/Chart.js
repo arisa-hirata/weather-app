@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState, useContext } from 'react';
 import { select, line, scaleLinear, scaleBand, axisBottom, area } from 'd3';
 import { WeatherContext } from './context/WeatherContext';
-import moment from 'moment';
 import '../App.css';
 
 const Chart = () => {
@@ -12,7 +11,7 @@ const Chart = () => {
     const svgRef = useRef();
     const NrOfSamples = 8;
 
-    // console.log("forecast: ", forecast);
+    // console.log("forecast: ", forecast.list);
 
     const getForecastSamples = () => {
         let forecastDataElement = forecast.list[0];
@@ -37,7 +36,7 @@ const Chart = () => {
 
         for(let j = startIndex; j < startIndex + NrOfSamples; j++) {
             forecastDataElement = forecast.list[j];
-            console.log("forecastDataElement: ", forecastDataElement);
+            // console.log("forecastDataElement: ", forecastDataElement);
 
 
             tempMax = forecastDataElement.main.temp-273 > tempMax ? Math.round(forecastDataElement.main.temp-273) : tempMax;
@@ -51,6 +50,7 @@ const Chart = () => {
                 idx: j-startIndex
             } )
         }
+
         setForecastData(samples);
         setMin(tempMin-2);
         setMax(tempMax+2);
