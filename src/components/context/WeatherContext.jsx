@@ -19,7 +19,7 @@ export const WeatherProvider = (props) => {
             const weatherData = await axios(weatherUrl);
             const forecastData = await axios(forecastUrl);
             // console.log("weatherData: ", weatherData.data);
-            console.log("forecastData: ", forecastData.data);
+            // console.log("forecastData: ", forecastData.data);
 
             setWeather(weatherData.data);
             setForecast(forecastData.data);
