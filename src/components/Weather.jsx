@@ -1,72 +1,57 @@
 import React, { useContext } from 'react';
 import { WeatherContext } from './context/WeatherContext';
+import { WEATHER_ICONS } from '../utils';
 import '../App.css';
-
-const WEATHER_ICONS = {
-    Thunderstorm: "wi-thunderstorm",
-    Drizzle: "wi-sleet",
-    Rain: "wi-rain",
-    Snow: "wi-snow",
-    Atmosphere: "wi-fog",
-    Clear: "wi-day-sunny",
-    Clouds: "wi-cloud",
-    ClearNight: "wi-night-clear",
-    CloudyNight: "wi-night-alt-cloudy",
-    FoggyNight: "wi-night-fog",
-    SonwyNight: "wi-night-snow",
-    RainyNight: "wi-night-rain",
-    DrizzleNight: "wi-night-showers",
-    ThunderstormNight: "wi-night-thunderstorm"
-}
 
 const Weather = () => {
     const { weather } = useContext(WeatherContext);
-
-        const weatherIcon = weather.weather[0].id ;
-
-        if (weatherIcon >= 200 && weatherIcon < 232) {
+    const getIcon = (Id) => {
+        let icon ;
+        if (Id >= 200 && Id < 232) {
             if (weather.sys.sunset < weather.dt || weather.dt <= weather.sys.sunrise) {
-                var icon = WEATHER_ICONS.ThunderstormNight;
+                icon = WEATHER_ICONS.ThunderstormNight;
             } else {
-                var icon = WEATHER_ICONS.Thunderstorm;
+                icon = WEATHER_ICONS.Thunderstorm;
             }
-        } else if (weatherIcon >= 300 && weatherIcon <= 321) {
+        } else if (Id >= 300 && Id <= 321) {
             if (weather.sys.sunset < weather.dt || weather.dt <= weather.sys.sunrisee) {
-                var icon = WEATHER_ICONS.DrizzleNight;
+                icon = WEATHER_ICONS.DrizzleNight;
             } else {
-                var icon = WEATHER_ICONS.Drizzle;
+                icon = WEATHER_ICONS.Drizzle;
             }
-        } else if (weatherIcon >= 500 && weatherIcon <= 521) {
+        } else if (Id >= 500 && Id <= 521) {
             if (weather.sys.sunset < weather.dt || weather.dt <= weather.sys.sunrise) {
-                var icon = WEATHER_ICONS.RainyNight;
+                icon = WEATHER_ICONS.RainyNight;
             } else {
-                var icon = WEATHER_ICONS.Rain;
+                icon = WEATHER_ICONS.Rain;
             }
-        } else if (weatherIcon >= 600 && weatherIcon <= 622) {
+        } else if (Id >= 600 && Id <= 622) {
             if (weather.sys.sunset < weather.dt || weather.dt <= weather.sys.sunrise) {
-                var icon = WEATHER_ICONS.SonwyNight;
+                icon = WEATHER_ICONS.SonwyNight;
             } else {
-                var icon = WEATHER_ICONS.Snow;
+                icon = WEATHER_ICONS.Snow;
             }
-        } else if (weatherIcon >= 701 && weatherIcon <= 781) {
+        } else if (Id >= 701 && Id <= 781) {
             if (weather.sys.sunset < weather.dt || weather.dt <= weather.sys.sunrise) {
-                var icon = WEATHER_ICONS.FoggyNight;
+                icon = WEATHER_ICONS.FoggyNight;
             } else {
-                var icon = WEATHER_ICONS.Atmosphere;
+                icon = WEATHER_ICONS.Atmosphere;
             }
-        } else if (weatherIcon === 800) {
+        } else if (Id === 800) {
             if (weather.sys.sunset < weather.dt || weather.dt <= weather.sys.sunrise) {
-                var icon = WEATHER_ICONS.ClearNight;
+                icon = WEATHER_ICONS.ClearNight;
             } else {
-                var icon = WEATHER_ICONS.Clear;
+                icon = WEATHER_ICONS.Clear;
             }
-        } else if (weatherIcon >= 801 && weatherIcon <= 804) {
+        } else if (Id >= 801 && Id <= 804) {
             if (weather.sys.sunset < weather.dt || weather.dt <= weather.sys.sunrise) {
-                var icon = WEATHER_ICONS.CloudyNight;
+                icon = WEATHER_ICONS.CloudyNight;
             } else {
-                var icon = WEATHER_ICONS.Clouds;
+                icon = WEATHER_ICONS.Clouds;
             }
         }
+        return icon
+    }
 
     return (
         <div className="content-container">
@@ -75,12 +60,11 @@ const Weather = () => {
                     <h3>{weather.weather[0].main}</h3>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 80 }}>
                         <div>
-                            <p><i className={`wi ${icon}`} style={{fontSize: 80}}></i></p>
+                            <p><i className={`wi ${getIcon(weather.weather[0].id)}`} style={{fontSize: 80}}></i></p>
                         </div>
                         <div>
                             <h1 style={{fontSize: 50}}>{Math.floor(weather.main.temp-273.15)}°</h1>
                         </div>
-                        {/*<p>Feels like {feelslike} ℃</p>*/}
                     </div>
                     <div style={{ display: 'flex' , justifyContent: 'space-evenly', height: 50}}>
                         <h4>H: {Math.floor(weather.main.temp_max-273.15)}°</h4>
