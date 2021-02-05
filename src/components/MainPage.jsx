@@ -3,18 +3,23 @@ import Weather from './Weather';
 import Chart from './Chart';
 import DailyForecast from './DailyForecast';
 import { WeatherContext } from './context/WeatherContext';
+import '../App.css';
 
 const MainPage = () => {
-    const { weather, forecast } = useContext(WeatherContext);
+    const { forecast, isError } = useContext(WeatherContext);
     return (
-        <div>
-        {weather.name && forecast.city !== undefined ? (
-            <div>
-                <Weather />
-                <Chart />
-                <DailyForecast />
-            </div>
-            ) : ('')}
+        <div className="main-page">
+
+            {/*{isError && <div>Something went to wrong ...</div>}*/}
+            {forecast.city !== undefined ? (
+                <div>
+                    <Weather />
+                    <Chart />
+                    <DailyForecast />
+                </div>
+            ) : (
+                <div className="spinner"></div>
+            )}
         </div>
     );
 }

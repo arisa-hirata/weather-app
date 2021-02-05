@@ -15,6 +15,26 @@
   justify-content: flex-end;
 }
 
+.main-page {
+  margin-top: 100px;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  margin: 10px auto;
+  border: 4px #ddd solid;
+  border-top: 4px #3FAAFF solid;
+  border-radius: 50%;
+  animation: sp-anime 1.0s infinite linear;
+}
+
+@keyframes sp-anime {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* .search-form {
   max-width: 300px;
   margin-bottom: 20px;
@@ -45,18 +65,13 @@ input::placeholder {
   border-radius:50px;
   background:#3FAAFF;
   color:#fff;
-  /* font-weight:bold; */
   font-size:16px;
   border:none;
   position: absolute;
   top: 20px;
   right: 45px;
-  /* left: 255px; */
-  /*アイコン左右の位置調整*/
-  /* top: 0; */
   border: 0;
   font-size: 15px;
-  /*アイコンサイズ*/
 }
 
 .search-btn:hover {
@@ -128,4 +143,8 @@ table tr {
 
 table tr:hover {
   background-color: #F5F5F5;
+}
+
+.icon {
+  font-size: 28px;
 }

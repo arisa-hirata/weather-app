@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import axios from 'axios';
 
 export const WeatherContext = createContext();
@@ -6,44 +6,42 @@ export const WeatherContext = createContext();
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 export const WeatherProvider = (props) => {
-    const [city, setCity] = useState('');
-    const [weather, setWeather] = useState([]);
     const [forecast, setForecast] = useState([]);
+    const [city, setCity] = useState('');
+    const [url, setUrl] = useState(
+        `http://api.openweathermap.org/data/2.5/forecast?q=vancouver&appid=${API_KEY}`
+    );
+    const [isError, setIsError] = useState(false);
 
-    const getWeather = async () => {
-        try {
-            const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
-
-            const forecastUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}`;
-
-            const weatherData = await axios(weatherUrl);
-            const forecastData = await axios(forecastUrl);
-            // console.log("weatherData: ", weatherData.data);
-            // console.log("forecastData: ", forecastData.data);
-
-            setWeather(weatherData.data);
-            setForecast(forecastData.data);
-
-        } catch (e) {
-            console.log("error: ", e);
+    useEffect(() => {
+        const fetchData = async () => {
+            setIsError(false);
+            try {
+                const result = await axios(url);
+                setForecast(result.data);
+            } catch (error) {
+                setIsError(true);
+                console.log("error: ", error);
+            }
         }
-    }
+        fetchData();
+    }, [url])
 
     const handleSearchChange = (e) => {
         setCity(e.target.value);
     }
 
     const handleSubmit = (e) => {
+        setUrl(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}`);
         e.preventDefault();
-        getWeather();
     }
 
     return (
         <WeatherContext.Provider
             value={{
                 city,
-                weather,
                 forecast,
+                isError,
                 handleSearchChange,
                 handleSubmit,
             }}
