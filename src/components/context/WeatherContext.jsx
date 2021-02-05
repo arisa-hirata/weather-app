@@ -6,31 +6,33 @@ export const WeatherContext = createContext();
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 export const WeatherProvider = (props) => {
+    const [forecast, setForecast] = useState([]);
     const [city, setCity] = useState('');
-    const [forecast, setForecast] = useState(
+    const [url, setUrl] = useState(
         `http://api.openweathermap.org/data/2.5/forecast?q=vancouver&appid=${API_KEY}`
     );
+    const [isError, setIsError] = useState(false);
 
-    useEffect(async () => {
-        console.log('hello!: ', forecast);
+    useEffect(() => {
         const fetchData = async () => {
-
+            setIsError(false);
             try {
-                const result = await axios(forecast);
+                const result = await axios(url);
                 setForecast(result.data);
             } catch (error) {
-                console.log(error);
+                setIsError(true);
+                console.log("error: ", error);
             }
         }
         fetchData();
-    }, [forecast])
+    }, [url])
 
     const handleSearchChange = (e) => {
         setCity(e.target.value);
     }
 
     const handleSubmit = (e) => {
-        setForecast(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}`);
+        setUrl(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}`);
         e.preventDefault();
     }
 
@@ -39,6 +41,7 @@ export const WeatherProvider = (props) => {
             value={{
                 city,
                 forecast,
+                isError,
                 handleSearchChange,
                 handleSubmit,
             }}

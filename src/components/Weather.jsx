@@ -60,7 +60,7 @@ const Weather = () => {
     return (
         <div className="content-container">
                 <div>
-                    <h1 style={{ marginTop: 100 }}>{forecast.city.name}, {forecast.city.country}</h1>
+                    <h1>{forecast.city.name}, {forecast.city.country}</h1>
                     <h3>{forecast.list[0].weather[0].main}</h3>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 80 }}>
                         <div>

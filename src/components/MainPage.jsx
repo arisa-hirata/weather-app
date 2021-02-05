@@ -6,9 +6,11 @@ import { WeatherContext } from './context/WeatherContext';
 import '../App.css';
 
 const MainPage = () => {
-    const { forecast } = useContext(WeatherContext);
+    const { forecast, isError } = useContext(WeatherContext);
     return (
-        <div>
+        <div className="main-page">
+
+            {/*{isError && <div>Something went to wrong ...</div>}*/}
             {forecast.city !== undefined ? (
                 <div>
                     <Weather />
@@ -16,7 +18,7 @@ const MainPage = () => {
                     <DailyForecast />
                 </div>
             ) : (
-                <div style={{marginTop: 100}} className="spinner"></div>
+                <div className="spinner"></div>
             )}
         </div>
     );
