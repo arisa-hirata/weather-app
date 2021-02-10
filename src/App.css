@@ -3,7 +3,7 @@
   margin: 0 auto;
 }
 
-.nav-bar {
+/* .nav-bar {
   background-color: #001628;
   position: fixed;
   left: 0;
@@ -13,7 +13,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-}
+} */
 
 .main-page {
   margin-top: 100px;
@@ -40,7 +40,7 @@
   margin-bottom: 20px;
 } */
 
-.search-input {
+/* .search-input {
   outline: none;
   height:35px;
   padding:0 10px;
@@ -76,7 +76,7 @@ input::placeholder {
 
 .search-btn:hover {
   background-color: #7fbfff;
-}
+} */
 
 .content-container {
   margin: auto;

@@ -1,0 +1,37 @@
+.search-input {
+    outline: none;
+    height: 35px;
+    padding: 0 10px;
+    width: 150px;
+    border-radius: 5px;
+    background-color: #4e6272;
+    color: white;
+    margin-right: 40px;
+}
+
+input:hover {
+    background-color: #738693;
+}
+
+input::placeholder {
+    color: #a8b7c4;
+}
+
+.search-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    background: #3FAAFF;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    border: 0;
+    font-size: 15px;
+}
+
+.search-btn:hover {
+    background-color: #7fbfff;
+}
