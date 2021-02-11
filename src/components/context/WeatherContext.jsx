@@ -9,7 +9,7 @@ export const WeatherProvider = (props) => {
     const [forecast, setForecast] = useState([]);
     const [city, setCity] = useState('');
     const [url, setUrl] = useState(
-        `http://api.openweathermap.org/data/2.5/forecast?q=vancouver&appid=${API_KEY}`
+        `https://api.openweathermap.org/data/2.5/forecast?q=vancouver&appid=${API_KEY}`
     );
     const [isError, setIsError] = useState(false);
 
@@ -32,7 +32,7 @@ export const WeatherProvider = (props) => {
     }
 
     const handleSubmit = (e) => {
-        setUrl(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}`);
+        setUrl(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}`);
         e.preventDefault();
     }
 
