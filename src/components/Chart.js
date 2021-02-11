@@ -11,8 +11,6 @@ const Chart = () => {
     const svgRef = useRef();
     const NrOfSamples = 8;
 
-    // console.log("forecast: ", forecast.list);
-
     const getForecastSamples = () => {
         let forecastDataElement = forecast.list[0];
         let samples = [];
