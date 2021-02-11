@@ -6,7 +6,7 @@ import { WeatherContext } from './context/WeatherContext';
 import '../App.css';
 
 const MainPage = () => {
-    const { forecast, isError } = useContext(WeatherContext);
+    const { forecast　} = useContext(WeatherContext);
     return (
         <div className="main-page">
 

@@ -19,25 +19,11 @@ const Chart = () => {
         let tempMin = 99;
         let tempMax = -99;
         let startIndex;
-        const day = 8;
 
-        // if(new Date().getDay() === day) { // if today
-            startIndex = 0;
-        // }
-        // else {
-            // for(let i = 0; i < forecast.list.length; i++) {
-            //     forecastDataElement = forecast.list[i];
-            //     if(moment.utc(forecastDataElement.dt*1000).day() === day) {
-            //     startIndex = i+1;
-            //     break;
-            //     }
-            // }
-        // }
+        startIndex = 0;
 
         for(let j = startIndex; j < startIndex + NrOfSamples; j++) {
             forecastDataElement = forecast.list[j];
-            // console.log("forecastDataElement: ", forecastDataElement);
-
 
             tempMax = forecastDataElement.main.temp-273 > tempMax ? Math.round(forecastDataElement.main.temp-273) : tempMax;
             tempMin = forecastDataElement.main.temp - 273 < tempMin ? Math.round(forecastDataElement.main.temp - 273) : tempMin;
