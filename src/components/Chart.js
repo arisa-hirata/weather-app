@@ -11,7 +11,8 @@ const Chart = () => {
     const svgRef = useRef();
     const NrOfSamples = 8;
 
-    const getForecastSamples = () => {
+    useEffect(() => {
+        const getForecastSamples = () => {
         let forecastDataElement = forecast.list[0];
         let samples = [];
         let tempMin = 99;
@@ -39,8 +40,6 @@ const Chart = () => {
         setMin(tempMin-2);
         setMax(tempMax+2);
     }
-
-    useEffect(() => {
         getForecastSamples();
     }, [forecast])
 
@@ -146,7 +145,7 @@ const Chart = () => {
             .attr("x", d => d.idx*(width/(NrOfSamples-1)))
             .attr("y", height+20) // offset icons down
 
-    }, [forecastData])
+    }, [forecastData, max, min])
 
 
     return (
