@@ -2,28 +2,12 @@ import { render } from '@testing-library/react';
 import Weather from '../Weather';
 import { WeatherContext } from '../context/WeatherContext';
 
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-      json: () => Promise.resolve({
-          forecast: {
-              city: {
-                  name: 'vancouver'
-              }
-          }
-      }),
-  })
-);
-
- const customRender = (ui, { providerProps, ...renderOptions }) => {
-            return render(
-                <WeatherContext.Provider {...providerProps}>{ui}</WeatherContext.Provider>,
-                renderOptions
-            )
-        }
-
-beforeEach(() => {
-  fetch.mockClear();
-});
+const customRender = (ui, { providerProps, ...renderOptions }) => {
+    return render(
+        <WeatherContext.Provider {...providerProps}>{ui}</WeatherContext.Provider>,
+        renderOptions
+    )
+}
 
 describe('Weather', () => {
     it("should show weather data", async() => {
@@ -50,7 +34,7 @@ describe('Weather', () => {
                 {(value) => <Weather forecast={value} />}
             </WeatherContext.Consumer>,
             { providerProps }
-        )
+        );
 
         expect(getByText('Clear').textContent).toBeTruthy();
     });

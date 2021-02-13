@@ -1,30 +1,31 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import React from 'react';
+import { render, screen, fireEvent, act, cleanup } from '@testing-library/react';
 import SearchField from '../SearchField';
 import { WeatherProvider, WeatherContext } from '../context/WeatherContext';
 
 describe('SearchField', () => {
-    it("should show searchfield", async() => {
-        const handleSubmit = jest.fn();
 
-        render(
-            <WeatherProvider>
-                <WeatherContext.Consumer>
-                    {(value) => (
-                        <SearchField onSubmit={value.handleSubmit}/>
-                    )}
-                </WeatherContext.Consumer>
-            </WeatherProvider>
-        )
+    afterEach(cleanup);
+
+    test("should show searchfield", async() => {
+        const mockSubmit = jest.fn();
+
+        await act(async () => {
+            render(
+                <WeatherProvider>
+                    <SearchField />
+                    <WeatherContext.Consumer>{mockSubmit}</WeatherContext.Consumer>
+                </WeatherProvider>,
+            );
+        })
 
         expect(screen.getByRole('textbox')).toBeInTheDocument();
         expect(screen.getByRole('button')).toBeInTheDocument();
 
-        // fireEvent.change(screen.getByRole('textbox'), {
-        // target: { value: 'Vancouver' },
-        // });
-        // await fireEvent.click(screen.getByRole('button'));
+        fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Vancouver' } });
+        fireEvent.click(screen.getByRole('button'));
 
-        // screen.debug();
-        // expect(handleSubmit).toHaveBeenCalled();
+        expect(mockSubmit).toHaveBeenCalledTimes(3);
+
     });
 });
