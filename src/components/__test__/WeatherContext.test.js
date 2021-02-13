@@ -1,30 +1,40 @@
 import React from 'react'
-import { render, screen, act } from '@testing-library/react'
+import { render, act, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
-import { WeatherContext, WeatherProvider } from '../context/WeatherContext';
+import { WeatherContext } from '../context/WeatherContext';
 
-global.fetch = jest.fn(() => {
-    Promise.resolve({
-        json: () =>
-            Promise.resolve({
-                value: "vancouver"
-            }),
-    })
-});
+const customRender = (ui, { providerProps, ...renderOptions }) => {
+  return render(
+    <WeatherContext.Provider {...providerProps}>{ui}</WeatherContext.Provider>,
+    renderOptions
+  )
+}
 
 describe("WeatherContext", () => {
-    test('weather context', () => {
+    test('renders weather data', async() => {
+        const providerProps = {
+            value: 'Clear',
+        }
 
-        const { getByText } = render(
-            <WeatherProvider>
-                <WeatherContext.Consumer>
-                    {(value) => (
-                        <span>Weather Context{value.forecast}</span>
-                    )}
-                </WeatherContext.Consumer>
-            </WeatherProvider>
+        jest.spyOn(global, "fetch").mockImplementation(() =>
+            Promise.resolve({
+                json: () => Promise.resolve({
+                    json: () => Promise.resolve(providerProps)
+                })
+            })
         );
 
-        expect(getByText("Weather Context")).toBeTruthy();
+        await act(async () => {
+            customRender(
+                <WeatherContext.Consumer>
+                    {(value) => <span>Weather is: {value}</span>}
+                </WeatherContext.Consumer>,
+                { providerProps }
+            )
+        });
+
+        expect(screen.getByText(/^Weather is:/).textContent).toBe('Weather is: Clear');
+
+        global.fetch.mockRestore();
     });
 });
