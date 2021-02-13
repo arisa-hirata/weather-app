@@ -1,6 +1,6 @@
 import React from 'react';
-import SearchField from '../SearchField/SearchField';
-import './NavBar.css';
+import SearchField from './SearchField';
+import '../styles/NavBar.css';
 
 const NavBar = () => {
     return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from './components/NavBar/NavBar';
+import NavBar from './components/NavBar';
 import MainPage from './components/MainPage';
 import { WeatherProvider } from './components/context/WeatherContext';
 import './App.css';

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { WeatherContext } from '../context/WeatherContext';
+import { WeatherContext } from './context/WeatherContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import './SearchField.css';
+import '../styles/SearchField.css';
 
 const SearchField = () => {
     const { handleSubmit, handleSearchChange, city} = useContext(WeatherContext);
